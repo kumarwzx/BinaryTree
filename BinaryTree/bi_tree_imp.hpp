@@ -1,35 +1,89 @@
 #pragma once
 
 #include"bi_tree.h"
+
 #include<string>
 #include<sstream>
 
+// 析构
+template <typename ElemType>
+BiTree<ElemType>::~BiTree() {
+	destoryThisBiTree();
+}
+
+// 交换所有左右孩子结点
+template <typename ElemType>
+void BiTree<ElemType>::exchangeThisTreeChild() {
+	exchangeChild(this->root_);
+}
+
+template <typename ElemType>
+void BiTree<ElemType>::exchangeChild(BiNodePtr& nodeptr) {
+	if (nodeptr != nullptr) {
+		BiNodePtr tmp = nodeptr->lchild_;
+		nodeptr->lchild_ = nodeptr->rchild_;
+		nodeptr->rchild_ = tmp;
+		exchangeChild(nodeptr->lchild_);
+		exchangeChild(nodeptr->rchild_);
+	}
+}
+
+// 输出符合条件的结点
+template <typename ElemType>
+template <typename _CONDITION>
+void BiTree<ElemType>::printCondNode(_CONDITION condition) {
+	std::stack<BiNodePtr> S;
+	BiNodePtr ptr = this->root_;
+	while (ptr != nullptr || !S.empty()) {
+		if (ptr != nullptr) {
+			S.push(ptr);
+			ptr = ptr->lchild_;
+		}
+		else {
+			ptr = S.top();
+			S.pop();
+			if (condition(ptr)) {
+				cout << ptr->data_ << " ";
+			}
+			ptr = ptr->rchild_;
+		}
+	}
+	cout << endl;
+}
+
+// 插入数据元素
 template <typename ElemType>
 template <typename _Elem, typename _CMP>
 bool BiTree<ElemType>::insertChild(_Elem p, LR type, BiNode c, _CMP cmp) {
 	BiNodePtr pos = nullptr;
 	if (!findNode<_Elem, _CMP>(pos, p, cmp)) {
+		cout << "Can't locate this Node" << endl;
 		return false;
 	}
 	if (type == LR::LEFT && pos->lchild_ == nullptr) {
 		pos->lchild_ = new BiNode(c);
 		++node_num_;
+		cout << "Successfully insert the left child." << endl;
 		return true;
 	}
 	if (type == LR::RIGHT && pos->rchild_ == nullptr) {
 		pos->rchild_ = new BiNode(c);
 		++node_num_;
+		cout << "Successfully insert the right child." << endl;
 		return true;
 	}
+	cout<<"Can't insert this node"<<endl;
 	return false;
 }
 
+// 按数据域寻找结点
 template <typename ElemType>
 template <typename _Elem, typename _CMP>
-bool BiTree<ElemType>::findNode(BiNodePtr& pos, _Elem p, _CMP&& cmp) {
+bool BiTree<ElemType>::findNode(BiNodePtr& pos, _Elem p, _CMP cmp) {
 	std::stack<BiNodePtr> S;
 	BiNodePtr ptr = this->root_;
 	bool retflag = false;
+	// 后序遍历二叉树寻找符合条件的结点
 	while (ptr != nullptr || !S.empty()) {
 		if (ptr != nullptr) {
 			S.push(ptr);
@@ -197,12 +251,12 @@ int BiTree<ElemType>::thisBiTreeDepth() {
 // 后序遍历求二叉树的深度 参考教材示例
 template <typename ElemType>
 int BiTree<ElemType>::biTreeDepth(const BiNodePtr& nodeptr) {
-	int hl(0),hr(0),max(0);
+	int hl(0),hr(0),max_(0);
 	if (nodeptr != nullptr) {
 		hl = biTreeDepth(nodeptr->lchild_);
 		hr = biTreeDepth(nodeptr->rchild_);
-		max = hl > hr ? hl : hr;
-		return max + 1;
+		max_ = hl > hr ? hl : hr;
+		return max_ + 1;
 	}
 	else
 		return 0;
@@ -218,6 +272,8 @@ void BiTree<ElemType>::destoryThisBiTree() {
 // LRD 销毁二叉树
 template <typename ElemType>
 void BiTree<ElemType>::destoryBiTree(BiNodePtr& nodeptr ) {
+	if (nodeptr == nullptr)
+		return;
 	if (nodeptr->lchild_ != nullptr) 
 		destoryBiTree(nodeptr->lchild_);
 	if(nodeptr->rchild_ != nullptr)
@@ -272,7 +328,6 @@ void BiTree<ElemType>::createDLR(stringstream& elemstring, BiNodePtr& nodeptr) {
 	}
 }
 
-
 // 创建二叉树
 template <typename ElemType>
 void BiTree<ElemType>::createBiTree() {
@@ -280,7 +335,7 @@ void BiTree<ElemType>::createBiTree() {
 	std::cout << "请输入二叉树的先序序列，每个结点用空格隔开， " << END_FLAG << " 代表结点为空:" << std::endl;
 	string elemstr;
 	// 输入先序序列 以空格隔开 用特殊标记 END_FLAG 代表结点为空 回车结束
-	std::getline(cin, elemstr);
+	std::getline(std::cin, elemstr);
 	stringstream elemstring;
 	// 将字串读入流
 	elemstring << elemstr;

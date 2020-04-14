@@ -21,9 +21,16 @@
   <ItemGroup>
     <ClInclude Include="bi_tree.h" />
     <ClInclude Include="bi_tree_imp.hpp" />
+    <ClInclude Include="config.h" />
+    <ClInclude Include="huffman_tree.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="test_bi_node.cpp" />
+    <ClCompile Include="config.cpp" />
+    <ClCompile Include="huffman_tree.cpp" />
+    <ClCompile Include="test_all.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

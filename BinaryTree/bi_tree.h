@@ -77,8 +77,12 @@ public:
 	// 用指向根节点的指针构造
 	BiTree(BiNodePtr root, int node_num) :root_(root), node_num_(node_num) {};
 
+	~BiTree();
+
 	// 初始化 无参构造函数中已经实现
-	void initBiTree() {};
+	void initBiTree() {
+		destoryThisBiTree();
+	};
 
 	// 创建二叉树
 	void createBiTree();
@@ -129,5 +133,13 @@ public:
 	// 按数据域寻找结点
 	//bool findNode(ElemType p, BiNodePtr& pos, );
 	template <typename _Elem, typename _CMP>
-	bool findNode(BiNodePtr& pos, _Elem p, _CMP&& cmp);
+	bool findNode(BiNodePtr& pos, _Elem p, _CMP cmp);
+
+	// 输出符合条件的结点
+	template <typename _CONDITION>
+	void printCondNode(_CONDITION condition);
+
+	// 交换所有结点的左右孩子结点
+	void exchangeThisTreeChild();
+	void exchangeChild(BiNodePtr& nodeptr);
 };
