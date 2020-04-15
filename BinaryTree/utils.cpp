@@ -71,6 +71,7 @@ namespace utils {
 			break;
 		case '4':
 			choice = '4';
+			break;
 		case 'q':
 			choice = 'q';
 			break;
