@@ -12,6 +12,12 @@ Huffman::~Huffman() {
 	hf_code_.clear();
 }
 
+void Huffman::showHuffTree() {
+	for (auto& ele : hf_code_) {
+		cout << ele.first << ":(" << ele.second << ")" << endl;
+	}
+}
+
 void Huffman::decodingThis(string& str, string coding){
 	str.clear();
 	uint32_t n = hf_code_.size(); // 获取字符集的大小

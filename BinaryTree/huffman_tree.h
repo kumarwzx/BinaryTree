@@ -45,4 +45,7 @@ public:
 	// 选择父结点为空且权重最小和次小的结点 s1 保存最小
 	void select(uint32_t end, uint32_t& s1, uint32_t& s2);
 
+	// 显示编码字典
+	void showHuffTree();
+
 };

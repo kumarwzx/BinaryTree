@@ -14,9 +14,12 @@ namespace utils {
 			cout << "ÒÑÍê³É!" << endl;
 			break;
 		case '2':
-			huffmanCodeing(huff, coding, str);
+			huff.showHuffTree();
 			break;
 		case '3':
+			huffmanCodeing(huff, coding, str);
+			break;
+		case '4':
 			huffmanDecoding(huff, coding, origstr);
 			break;
 		case 'q':
@@ -45,8 +48,9 @@ namespace utils {
 
 	void huffDisplay(string& menustr) {
 		cout << "\033[32m---1.³õÊ¼»¯Huffman±àÒëÂëÆ÷" << endl;
-		cout << "---2.Huffman±àÂë" << endl;
-		cout << "---3.HuffmanÒëÂë" << endl;
+		cout << "---2.ÏÔÊ¾±àÂë×Öµä" << endl;
+		cout << "---3.Huffman±àÂë" << endl;
+		cout << "---4.HuffmanÒëÂë" << endl;
 		cout << "---q.ÍË³ö\033[0m" << endl;
 		cout << "---*.ÇëÊäÈëÄãµÄÑ¡Ôñ£º(»Ø³µ½áÊø)";
 		std::getline(std::cin, menustr);
@@ -65,6 +69,8 @@ namespace utils {
 		case '3':
 			choice = '3';
 			break;
+		case '4':
+			choice = '4';
 		case 'q':
 			choice = 'q';
 			break;
