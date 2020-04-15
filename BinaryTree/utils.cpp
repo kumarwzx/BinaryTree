@@ -44,10 +44,10 @@ namespace utils {
 	}
 
 	void huffDisplay(string& menustr) {
-		cout << "---1.初始化Huffman编译码器" << endl;
+		cout << "\033[32m---1.初始化Huffman编译码器" << endl;
 		cout << "---2.Huffman编码" << endl;
 		cout << "---3.Huffman译码" << endl;
-		cout << "---q.退出" << endl;
+		cout << "---q.退出\033[0m" << endl;
 		cout << "---*.请输入你的选择：(回车结束)";
 		std::getline(std::cin, menustr);
 		cout << endl;
@@ -77,9 +77,9 @@ namespace utils {
 
 	void startDisplayParse(char& choice) {
 		string choice_str;
-		cout << "-1.测试二叉树基本操作" << endl;
+		cout << "\033[32m-1.测试二叉树基本操作" << endl;
 		cout << "-2.测试Huffman编译码" << endl;
-		cout << "-q.退出" << endl;
+		cout << "-q.退出\033[0m" << endl;
 		cout << "-请输入你的选择(1 or 2): ";
 		std::getline(std::cin, choice_str);
 		switch (*choice_str.c_str())
@@ -100,7 +100,7 @@ namespace utils {
 	}
 
 	void display(string& menustr) {
-		cout << "---1.初始化二叉树" << endl;
+		cout << "\033[32m---1.初始化二叉树" << endl;
 		cout << "---2.销毁二叉树" << endl;
 		cout << "---3.构造二叉树" << endl;
 		cout << "---4.求二叉树深度" << endl;
@@ -109,7 +109,7 @@ namespace utils {
 		cout << "---7.交换所有左右孩子结点" << endl;
 		cout << "---8.遍历" << endl;
 		cout << "---9.打印当前二叉树" << endl;
-		cout << "---q.退出" << endl;
+		cout << "---q.退出\033[0m" << endl;
 		cout << "---*.请输入你的选择：(回车结束)";
 		std::getline(std::cin, menustr);
 		cout << endl;

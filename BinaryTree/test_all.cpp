@@ -38,11 +38,11 @@ void test_huffman_code_decode(Huffman& huff) {
 		utils::huffDisplay(menustr);
 		utils::huffParse(menustr, choice);
 		if (choice == ' ') {
-			cout << "***Your choice is wrong!!!***" << endl;
+			cout << "\033[31;1m***Your choice is wrong!!!***\033[0m" << endl;
 			continue;
 		}
 		utils::huffLaunch(huff, coding, str, origstr, choice, qflag);
-		cout << "-----------------------------------------" << endl;
+		cout << "\033[1m-----------------------------------------\033[0m" << endl;
 	}
 }
 
